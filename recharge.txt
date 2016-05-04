@@ -1,0 +1,265 @@
+package net.one97.paytm.test;
+
+import java.util.Random;
+
+import com.robotium.solo.*;
+
+import android.os.Build;
+import android.test.ActivityInstrumentationTestCase2;
+import android.widget.TextView;
+
+
+@SuppressWarnings("rawtypes")
+public class RechargeMasterTest extends ActivityInstrumentationTestCase2 {
+  	private Solo solo;
+  	
+  	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "net.one97.paytm.AJRJarvisSplash";
+
+    private static Class<?> launcherActivityClass;
+    static{
+        try {
+            launcherActivityClass = Class.forName(LAUNCHER_ACTIVITY_FULL_CLASSNAME);
+        } catch (ClassNotFoundException e) {
+           throw new RuntimeException(e);
+        }
+    }
+  	
+  	@SuppressWarnings("unchecked")
+    public RechargeMasterTest() throws ClassNotFoundException {
+        super(launcherActivityClass);
+    }
+
+  	public void setUp() throws Exception {
+        super.setUp();
+		solo = new Solo(getInstrumentation());
+		Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+		Appachhi.instrumentation = getInstrumentation();
+		Appachhi.collectInfo( solo );
+		getActivity();
+  	}
+  
+   	@Override
+   	public void tearDown() throws Exception {
+        solo.finishOpenedActivities();
+		Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+		Appachhi.actionDescription="Screenshot Before Exit";
+		Appachhi.responseTime = 0.0;
+		Appachhi.collectInfo( solo );
+		super.tearDown();
+  	}
+    public String generateRandomNumber()
+ {
+     String model = Build.MODEL;
+     String deviceCode = "";
+     switch( model ) {
+     case "GT-N7100":
+         deviceCode = "9148979240";
+         break;
+     case "GT-S7582":
+         deviceCode = "9148979244";
+         break;
+     case "GT-I9082":
+         deviceCode = "9148979243";
+         break;
+     case "A7010a48":
+         deviceCode = "7349076914";
+         break;
+     case "MotoE2(4G-LTE)":
+         deviceCode = "9148979239";
+         break;
+     case "XT1033":
+         deviceCode = "07";
+         break;
+     case "GT-I9300":
+         deviceCode = "08";
+         break;
+     case "Nexus 6":
+         deviceCode = "9148979242";
+         break;
+     case "XT1068":
+         deviceCode = "7349076874";
+         break;
+     case "ASUS_Z00LD":
+         deviceCode = "9148979245";
+         break;
+     default:
+         deviceCode = "9986413389";
+         break;
+         
+     }
+     return(deviceCode);
+ }
+  
+	@MyTestDescription(desc = "RechargeMasterTest")
+	public void testRun() {
+		Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+		Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+		Appachhi.screenName="Screen_";
+		Appachhi.actionDescription="First Screen shot for Install App.";
+		Appachhi.collectInfo( solo );
+		boolean result = false;
+		boolean dataLoadedBeforeResponseTime = false;
+		int maxResponseTime = 100;
+		long startTime,endTime;
+		// Wait for activity: 'net.one97.paytm.AJRMainActivity'
+		solo.waitForActivity("AJRMainActivity");	
+		// Wait for activity: 'net.one97.paytm.AJRHelpOverlay'
+		assertTrue("AJRHelpOverlay is not found!", solo.waitForActivity("AJRHelpOverlay"));
+		if (solo.waitForActivity("AJRHelpOverlay")){
+			solo.clickOnView(solo.getView("help_overlay"));
+		}
+		if(solo.searchText("No, thanks",1,false,true)){
+			solo.clickOnText("No, thanks");	
+		}
+		Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+		Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+		Appachhi.screenName = "Screen_";
+		Appachhi.actionDescription = "Action: click on text \"Account\" clicked";
+		Appachhi.isTextPresent( solo, "Account", "Assert for text \"Account\"", 1, 1000, true, true );
+		solo.clickOnText("Account",1);
+		if ( !solo.waitForText("Appachhi Tech", 1, 500, false) )
+		{
+			// Click on RelativeLayout Hello! Sign In to Paytm Name
+			Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+			Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+			Appachhi.screenName = "Screen_";
+			Appachhi.actionDescription = "Action: click on view \"lyt_user\""+" clicked";
+			Appachhi.isViewPresent( solo, "lyt_user", "Assert for view \"lyt_user\"", 1, 1000, true, false );
+			solo.clickOnView(solo.getView("lyt_user"));
+			// Click on Empty Text View
+			Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+			Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+			Appachhi.screenName = "Screen_";
+			Appachhi.actionDescription = "Action: click on view \"edit_username\""+" clicked";
+			solo.waitForText("Email");
+			Appachhi.isViewPresent( solo, "edit_username", "Assert for view \"edit_username\"", 1, 10000, true, false  );
+			/*solo.clickOnView(solo.getView("edit_username"));
+			// Enter the text: 'loginauthautomate@gmail.com'
+			solo.clearEditText((android.widget.EditText) solo.getView("edit_username"));*/
+			solo.enterText((android.widget.EditText) solo.getView("edit_username"), generateRandomNumber());
+			// Click on Empty Text View
+			Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+			Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+			Appachhi.screenName = "Screen_";
+			Appachhi.actionDescription = "Action: click on view \"edit_password\""+" clicked";
+			Appachhi.isViewPresent( solo, "edit_password", "Assert for view \"edit_password\"", 1, 1000, true, false  );
+			//solo.clickOnView(solo.getView("edit_password"));
+			// Enter the text: 'appachhi123'
+			//solo.clearEditText((android.widget.EditText) solo.getView("edit_password"));
+			solo.enterText((android.widget.EditText) solo.getView("edit_password"), "appachhi123");
+			// Click on Secure Login
+			Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+			Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+			Appachhi.screenName = "Screen_";
+			Appachhi.actionDescription = "Action: click on view \"lyt_sign_in_button\""+" clicked";
+			//Appachhi.isViewPresent( solo, "lyt_sign_in_button", "Assert for view \"lyt_sign_in_button\"", 1, 1000, true, false  );
+			solo.clickOnView(solo.getView("lyt_sign_in_button"));
+			if(solo.searchText("Verify",1,false,true)){
+				solo.sleep(8000);
+				solo.clickOnText("Verify");	
+			}
+			Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+			Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+			Appachhi.screenName = "Screen_";
+			Appachhi.actionDescription = "Check for successful login";
+			Appachhi.isTextPresent( solo, "Appachhi Tech", "Reason:Unsuccessful login|Expected:Login to be successful", 1, 10000, true, true );
+		}
+		// Press menu back key
+		Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+		Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+		Appachhi.screenName = "Screen_";
+		Appachhi.actionDescription = "Action: click on text \"Home\" clicked";
+		Appachhi.isTextPresent( solo, "Home", "Assert for text \"Home\"", 1, 10000, true, true );
+		solo.clickOnText("Home",1);
+		// Click on Empty Text View
+		Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+		Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+		Appachhi.screenName = "Screen_";
+		Appachhi.actionDescription = "Action: click on view \"edit_no\""+" clicked";
+		Appachhi.isViewPresent( solo, "edit_no", "Assert for view \"edit_no\"", 1, 1000, true, false  );
+		solo.clickOnView(solo.getView("edit_no"));
+		// Enter the text: '7349076875'
+		solo.clearEditText((android.widget.EditText) solo.getView("edit_no"));
+		solo.enterText((android.widget.EditText) solo.getView("edit_no"), "7349076875");
+		if (!solo.waitForText("Airtel",1,1000,false)) {
+			// Click on Change Operator or Circle
+			Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+			Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+			Appachhi.screenName = "Screen_";
+			Appachhi.actionDescription = "Action: click on view \"text_change_op\""+" clicked";
+			Appachhi.isViewPresent( solo, "text_change_op", "Assert for view \"text_change_op\"", 1, 1000, true, false  );
+			solo.clickOnView(solo.getView("text_change_op"));
+			
+			
+			// Click on Airtel
+			Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+			Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+			Appachhi.screenName = "Screen_";
+			Appachhi.actionDescription = "Action: click on text \"Airtel\" clicked";
+			Appachhi.isTextPresent( solo, "Airtel", "Assert for text \"Airtel\"", 1, 1000, true, true );
+			solo.clickOnText("Airtel",1,true);
+			// Scroll to Karnataka
+			Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+			Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+			Appachhi.screenName = "Screen_";
+			Appachhi.actionDescription = "Action: click on text \"Karnataka\" clicked";
+			Appachhi.isTextPresent( solo, "Karnataka", "Assert for text \"Karnataka\"", 1, 1000, true, true );
+			solo.clickOnText("Karnataka",1,true);
+			Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+			Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+			Appachhi.screenName = "Screen_";
+			Appachhi.actionDescription = "Check for successful operator selection";
+			Appachhi.isTextPresent( solo, "Airtel Karnataka", "Reason:Unsuccessful operator selection|Expected:Operator selection to be successful", 1, 10000, true, true );
+			
+		}
+		// Click on Browse Plans of Airtel Karnataka We support all recharges Just enter the amount.
+		Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+		Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+		Appachhi.screenName = "Screen_";
+		Appachhi.actionDescription = "Action: click on view \"lyt_edit_amount\""+" clicked";
+		Appachhi.isViewPresent( solo, "lyt_edit_amount", "Assert for view \"lyt_edit_amount\"", 1, 1000, true, false  );
+		solo.clickOnView(solo.getView("lyt_edit_amount"));
+		// Enter the text: '50'
+		solo.clearEditText((android.widget.EditText) solo.getView("edit_amount"));
+		solo.enterText((android.widget.EditText) solo.getView("edit_amount"), "50");
+		// Press next button
+		solo.pressSoftKeyboardNextButton();
+		// Click on Proceed to Recharge
+		Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+		Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+		Appachhi.screenName = "Screen_";
+		Appachhi.actionDescription = "Action: click on view \"proceed_btn\""+" clicked";
+		Appachhi.isViewPresent( solo, "proceed_btn", "Assert for view \"proceed_btn\"", 1, 1000, true, false  );
+		solo.clickOnView(solo.getView("proceed_btn"));
+		// Click on Proceed to Pay Rs 50
+		Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+		Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+		Appachhi.screenName = "Screen_";
+		Appachhi.actionDescription = "Action: click on view \"btn_pay_now\""+" clicked";
+		Appachhi.isViewPresent( solo, "btn_pay_now", "Assert for view \"btn_pay_now\"", 1, 10000, true, false  );
+		solo.clickOnView(solo.getView("btn_pay_now"));
+		startTime  = System.currentTimeMillis();
+		if (solo.waitForWebElement(By.id("otherpaymentModeHeading"), 120000, true )) {
+			result = true;
+		}
+		endTime  = System.currentTimeMillis();
+		double responseTime = (double)(endTime - startTime );
+		if ( !result ) {
+			Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+			Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+			Appachhi.screenName = "Screen_";
+			Appachhi.actionDescription = "Payment page not loaded";
+			Appachhi.responseTime = responseTime/1000.0;
+			Appachhi.collectInfo( solo ); 
+			assertTrue("Reason:Payment page not loaded|Expected:Payment page should be loaded", result);
+		}
+		if ( responseTime <= maxResponseTime ) dataLoadedBeforeResponseTime = true;
+		Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+		Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+		Appachhi.screenName = "Screen_";
+		Appachhi.actionDescription = "Payment Page";
+		Appachhi.responseTime = responseTime/1000.0; 
+		Appachhi.collectInfo( solo );
+		assertTrue("Reason:Load time ("+ responseTime/1000.0 +") seconds has been taken|Expected:Payment page to load before "+maxResponseTime/1000.0 +" seconds ", dataLoadedBeforeResponseTime);
+	}
+}

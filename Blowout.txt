@@ -1,0 +1,144 @@
+package app.stn.blowout.test;
+import com.robotium.solo.*;
+import android.test.ActivityInstrumentationTestCase2;
+
+
+@SuppressWarnings("rawtypes")
+public class BetaOutRegistration extends ActivityInstrumentationTestCase2 {
+  	private Solo solo;
+  	
+  	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "app.stn.blowout.SplashActivity";
+
+    private static Class<?> launcherActivityClass;
+    static{
+        try {
+            launcherActivityClass = Class.forName(LAUNCHER_ACTIVITY_FULL_CLASSNAME);
+        } catch (ClassNotFoundException e) {
+           throw new RuntimeException(e);
+        }
+    }
+  	
+  	@SuppressWarnings("unchecked")
+    public BetaOutRegistration() throws ClassNotFoundException {
+        super(launcherActivityClass);
+    }
+
+  	public void setUp() throws Exception {
+        super.setUp();
+		solo = new Solo(getInstrumentation());
+		getActivity();
+  	}
+  
+   	@Override
+   	public void tearDown() throws Exception {
+        solo.finishOpenedActivities();
+        super.tearDown();
+  	}
+  
+	public void testRun() {
+		// Wait for activity: 'app.stn.blowout.SplashActivity'
+		solo.waitForActivity("SplashActivity", 2000);
+		// Wait for activity: 'app.stn.blowout.HomeActivity'
+		solo.waitForActivity("HomeActivity");
+		assertTrue("HomeActivity is not found!", solo.waitForActivity("HomeActivity"));
+		
+		// Click on ImageView
+		solo.clickOnView(solo.getView("iv_drawer"));
+		
+		// Click on Login
+		solo.clickInList(2, 0);
+		// Wait for activity: 'app.stn.blowout.LoginActivity'
+		assertTrue("LoginActivity is not found!", solo.waitForActivity("LoginActivity"));
+		
+		// Click on Register Now
+		solo.clickOnView(solo.getView("btn_register"));
+		// Wait for activity: 'app.stn.blowout.SignUpActivity'
+		assertTrue("SignUpActivity is not found!", solo.waitForActivity("SignUpActivity"));
+		// Sleep for 1827 milliseconds
+		
+		solo.enterText((android.widget.EditText) solo.getView("edt_fName"), "Dharma");
+		
+		solo.enterText((android.widget.EditText) solo.getView("edt_lName"), "Krish");
+		
+		solo.enterText((android.widget.EditText) solo.getView("edt_email"), "dharma@gmail.com");
+		
+		solo.enterText((android.widget.EditText) solo.getView("edt_phone"), "9742379422");
+		// Sleep for 1611 milliseconds
+		solo.sleep(1611);
+		// Click on Empty Text View
+		solo.clickOnView(solo.getView("edt_dob"));
+		// Wait for dialog
+		solo.waitForDialogToOpen(5000);
+		// Sleep for 1124 milliseconds
+		
+		solo.enterText((android.widget.EditText) solo.getView("edt_dob"), "1995-Apr-12");
+		// Sleep for 1352 milliseconds
+		solo.sleep(1352);
+		// Click on Empty Text View
+		solo.clickOnView(solo.getView("edt_pasword"));
+		// Sleep for 3933 milliseconds
+		solo.sleep(3933);
+		// Enter the text: '123456'
+		solo.clearEditText((android.widget.EditText) solo.getView("edt_pasword"));
+		solo.enterText((android.widget.EditText) solo.getView("edt_pasword"), "123456");
+		// Sleep for 4616 milliseconds
+		solo.sleep(4616);
+		// Enter the text: '123456'
+		solo.clearEditText((android.widget.EditText) solo.getView("edt_conf_pasword"));
+		solo.enterText((android.widget.EditText) solo.getView("edt_conf_pasword"), "123456");
+		// Press next button
+		solo.pressSoftKeyboardNextButton();
+		// Sleep for 1663 milliseconds
+		solo.sleep(1663);
+		// Click on Register Now
+		solo.clickOnView(solo.getView("btn_register"));
+		// Sleep for 8349 milliseconds
+		solo.sleep(8349);
+		// Click on Empty Text View
+		solo.clickOnView(solo.getView("edt_email"));
+		// Sleep for 6149 milliseconds
+		solo.sleep(6149);
+		// Enter the text: 'dharma@gmail.com'
+		solo.clearEditText((android.widget.EditText) solo.getView("edt_email"));
+		solo.enterText((android.widget.EditText) solo.getView("edt_email"), "dharma@gmail.com");
+		// Sleep for 678 milliseconds
+		solo.sleep(678);
+		// Click on Empty Text View
+		solo.clickOnView(solo.getView("edt_pasword"));
+		// Sleep for 3885 milliseconds
+		solo.sleep(3885);
+		// Enter the text: '123456'
+		solo.clearEditText((android.widget.EditText) solo.getView("edt_pasword"));
+		solo.enterText((android.widget.EditText) solo.getView("edt_pasword"), "123456");
+		// Click on Log In
+		solo.clickOnView(solo.getView("btn_login"));
+		// Sleep for 4836 milliseconds
+		solo.sleep(4836);
+		// Click on ImageView
+		solo.clickOnView(solo.getView("iv_drawer"));
+		// Sleep for 3145 milliseconds
+		solo.sleep(3145);
+		// Click on Edit Profile
+		solo.clickInList(2, 0);
+		// Wait for activity: 'app.stn.blowout.EditProfileActivity'
+		assertTrue("EditProfileActivity is not found!", solo.waitForActivity("EditProfileActivity"));
+		// Sleep for 3168 milliseconds
+		solo.sleep(3168);
+		// Click on ImageView
+		solo.clickOnView(solo.getView(android.widget.ImageButton.class, 0));
+		// Sleep for 1890 milliseconds
+		solo.sleep(1890);
+		// Click on ImageView
+		solo.clickOnView(solo.getView("iv_drawer"));
+		// Sleep for 2691 milliseconds
+		solo.sleep(2691);
+		// Click on Logout
+		solo.clickInList(5, 0);
+		// Wait for dialog
+		solo.waitForDialogToOpen(5000);
+		// Sleep for 1758 milliseconds
+		solo.sleep(1758);
+		// Click on Yes
+		solo.clickOnView(solo.getView(android.R.id.button1));
+	}
+}

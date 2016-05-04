@@ -1,0 +1,359 @@
+package app.stn.blowout.test;
+
+import com.robotium.solo.*;
+
+import android.os.Build;
+import android.test.ActivityInstrumentationTestCase2;
+import app.stn.blowout.test.Appachhi;
+
+
+
+@SuppressWarnings("rawtypes")
+public class BetaOutRegistration extends ActivityInstrumentationTestCase2 {
+  	private Solo solo;
+  	
+  	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "app.stn.blowout.SplashActivity";
+
+    private static Class<?> launcherActivityClass;
+    static{
+        try {
+            launcherActivityClass = Class.forName(LAUNCHER_ACTIVITY_FULL_CLASSNAME);
+        } catch (ClassNotFoundException e) {
+           throw new RuntimeException(e);
+        }
+    }
+  	
+  	@SuppressWarnings("unchecked")
+    public BetaOutRegistration() throws ClassNotFoundException {
+        super(launcherActivityClass);
+    }
+
+  	public void setUp() throws Exception {
+        super.setUp();
+		solo = new Solo(getInstrumentation());
+		getActivity();
+  	}
+  
+   	@Override
+   	public void tearDown() throws Exception {
+        solo.finishOpenedActivities();
+        super.tearDown();
+  	}
+  
+   	public String generateRandomNumber()
+    {
+        String model = Build.MODEL;
+        String deviceCode = "";
+        switch( model ) {
+        case "GT-N7100":
+            deviceCode = "9148979240";
+            break;
+        case "GT-S7582":
+            deviceCode = "9148979244";
+            break;
+        case "GT-I9082":
+            deviceCode = "9148979243";
+            break;
+        case "A7010a48":
+            deviceCode = "7349076914";
+            break;
+        case "MotoE2(4G-LTE)":
+            deviceCode = "9148979239";
+            break;
+        case "XT1033":
+            deviceCode = "07";
+            break;
+        case "GT-I9300":
+            deviceCode = "08";
+            break;
+        case "Nexus 6":
+            deviceCode = "9148979242";
+            break;
+        case "XT1068":
+            deviceCode = "7349076874";
+            break;
+        case "ASUS_Z00LD":
+            deviceCode = "9148979245";
+            break;
+        default:
+            deviceCode = "9986413389";
+            break;
+            
+        }
+        return(deviceCode);
+    }
+   	
+   	    public String generateRandomname(){
+   	    	
+   	    	String CHAR_LIST =
+   	    	        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+   	    	     int RANDOM_STRING_LENGTH = 10;
+   	    	    	    
+   	         
+   	        StringBuffer randStr = new StringBuffer();
+   	        for(int i=0; i<RANDOM_STRING_LENGTH; i++){
+   	            
+   	            char ch = CHAR_LIST.charAt(i);
+   	            randStr.append(ch);
+   	        }
+   	        return randStr.toString();
+   	    }
+   	
+   	 
+	public void test1Registration() {
+		Appachhi.appchhiCodeRunTimeStart = System.currentTimeMillis();
+		Appachhi.activityName = solo.getCurrentActivity().getClass().getSimpleName();
+		Appachhi.screenName="Screen_";
+		Appachhi.actionDescription="First Screen shot for Install App.";
+		Appachhi.collectInfo( solo );
+		boolean result = false;
+		boolean dataLoadedBeforeResponseTime = false;
+		int maxResponseTime = 100;
+		long startTime,endTime;
+		
+		
+		// Wait for activity: 'app.stn.blowout.SplashActivity'
+		solo.waitForActivity("SplashActivity", 2000);
+		// Wait for activity: 'app.stn.blowout.HomeActivity'
+		solo.waitForActivity("HomeActivity");
+		assertTrue("HomeActivity is not found!", solo.waitForActivity("HomeActivity"));
+		
+		/*if(Appachhi.isViewPresent( solo, "txt_tab", "Assert for view \"txt_tab\"", 1, 120000, true, true )){
+			result = true;
+			}
+			endTime  = System.currentTimeMillis();
+			double responseTime = (double)(endTime - startTime );
+			if ( !result ) {
+			assertTrue("Reason:Did not load home screen|Expected:Home screen to be loaded", result);
+			}
+			if ( responseTime <= maxResponseTime ) dataLoadedBeforeResponseTime = true;
+			assertTrue("Reason:Load time ("+ responseTime/1000.0 +") seconds has been taken|Expected:Home screen to load before "+maxResponseTime/1000.0 +" seconds ", dataLoadedBeforeResponseTime);
+		
+		*/
+		
+		
+		// Click on ImageView
+		solo.clickOnView(solo.getView("iv_drawer"));
+		
+		// Click on Login
+		solo.clickInList(2, 0);
+		// Wait for activity: 'app.stn.blowout.LoginActivity'
+		assertTrue("LoginActivity is not found!", solo.waitForActivity("LoginActivity"));
+		
+		// Click on Register Now
+		solo.clickOnView(solo.getView("btn_register"));
+		// Wait for activity: 'app.stn.blowout.SignUpActivity'
+		assertTrue("SignUpActivity is not found!", solo.waitForActivity("SignUpActivity"));
+		// Sleep for 1827 milliseconds
+		
+		solo.enterText((android.widget.EditText) solo.getView("edt_fName"), generateRandomname());
+		
+		solo.enterText((android.widget.EditText) solo.getView("edt_lName"), "Krishk");
+		
+		solo.enterText((android.widget.EditText) solo.getView("edt_email"), generateRandomname()+"@gmail.com");
+		//solo.enterText((android.widget.EditText) solo.getView("edt_email"), "dharmak1@gmail.com");
+		
+		solo.enterText((android.widget.EditText) solo.getView("edt_phone"), generateRandomNumber());
+		//solo.enterText((android.widget.EditText) solo.getView("edt_phone"), "9742374422");
+		// Sleep for 1611 milliseconds
+		solo.sleep(1611);
+		// Click on Empty Text View
+		//solo.clickOnView(solo.getView("edt_dob"));
+		
+		//Enter DOB
+		solo.enterText((android.widget.EditText) solo.getView("edt_dob"), "1996-Apr-12");
+		
+		solo.clickOnText("Cancel");
+		//Enter Password
+		solo.enterText((android.widget.EditText) solo.getView("edt_pasword"), "123456");
+		//Enter confirm Password
+		solo.enterText((android.widget.EditText) solo.getView("edt_conf_pasword"), "123456");
+		
+		// Click on Register Now
+		solo.clickOnText("Register Now");
+		assertTrue("Registeration not successfull ", solo.waitForActivity("SignUpActivity"));
+	}
+	
+	
+	public void test2Login() {
+		//Wait for Logn Activity after Signup
+		solo.waitForActivity("HomeActivity");
+		solo.clickOnView(solo.getView("iv_drawer"));
+		solo.clickOnText("Login");
+		
+		
+		solo.enterText((android.widget.EditText) solo.getView("edt_email"), "dharmak1@gmail.com");
+		// Enter the text: '123456'
+		
+		solo.enterText((android.widget.EditText) solo.getView("edt_pasword"), "123456");
+		
+		
+		// Click on Log In
+		solo.clickOnView(solo.getView("btn_login"));
+		
+		assertTrue("Login not successfull ", solo.waitForActivity("HomeActivity"));
+	}
+		public void test3EditProfile() {
+			//Wait for Home Activity after Login
+		
+		solo.waitForActivity("HomeActivity");
+		solo.clickOnView(solo.getView("iv_drawer"));
+		
+		
+		// Click on Edit Profile
+		solo.clickInList(2, 0);
+		// Wait for activity: 'app.stn.blowout.EditProfileActivity'
+		assertTrue("EditProfileActivity is not found!", solo.waitForActivity("EditProfileActivity"));
+		solo.clearEditText(1);
+		solo.enterText(1, "editedname");
+		// Click on ImageView
+		solo.clickOnText("Update");
+		
+		assertTrue("Home is not found!", solo.waitForActivity("HomeActivity"));
+		//(solo.getView(android.widget.ImageButton.class, 0));
+		
+		// Click on ImageView
+		
+		//solo.clickOnView(solo.getView(android.R.id.button1));
+	}
+		
+		public void test4Attendparty() {
+			solo.waitForActivity("HomeActivity");
+			solo.clickOnView(solo.getView("iv_attend"));
+			// Wait for activity: 'app.stn.blowout.AttenPartyListActivity'
+			assertTrue("AttenPartyListActivity is not found!", solo.waitForActivity("AttenPartyListActivity"));
+			
+			// Click on Music Love Night Cinema Club & Lounge, Delhi 12/04/2016 ATTEND BOOK NOW
+			solo.clickOnView(solo.getView("rl_mainOuter"));
+			// Wait for activity: 'app.stn.blowout.AttendPartyDetailActivity'
+			assertTrue("AttendPartyDetailActivity is not found!", solo.waitForActivity("AttendPartyDetailActivity"));
+
+			// Click on Book Now
+			solo.clickOnView(solo.getView("btn_bookNow"));
+			// Wait for activity: 'app.stn.blowout.BookNormalAttendPartyActivity'
+			assertTrue("BookNormalAttendPartyActivity is not found!", solo.waitForActivity("BookNormalAttendPartyActivity"));
+			// Click on Empty Text View
+			solo.clickOnView(solo.getView("tv_plus_male"));
+			// Sleep for 3640 milliseconds
+			// Click on Empty Text View
+			solo.clickOnView(solo.getView("tv_plus_female"));
+			
+			// Click on Confirm Booking
+			solo.clickOnView(solo.getView("btn_confirm_booking"));
+			// Wait for dialog
+			solo.waitForDialogToOpen(5000);
+			// Sleep for 2478 milliseconds
+			solo.sleep(2478);
+			// Click on Log In
+			solo.clickOnView(solo.getView(android.R.id.button1));
+			
+			
+		}
+		public void test5throwparty(){
+			solo.waitForActivity("HomeActivity");
+			solo.clickOnView(solo.getView("iv_throw"));
+			// Wait for activity: 'app.stn.blowout.ThrowPartyActivity'
+			assertTrue("ThrowPartyActivity is not found!", solo.waitForActivity("ThrowPartyActivity"));
+			// Sleep for 2206 milliseconds
+			solo.sleep(2206);
+			// Click on Select Date
+			solo.clickOnView(solo.getView("btndate"));
+			solo.setDatePicker(0, 2016, 7, 20);
+			// Wait for dialog
+			// Click on Set
+			solo.enterText((android.widget.EditText) solo.getView("numberpicker_input", 1), "13");
+			solo.clickOnView(solo.getView(android.R.id.button1));
+			// Sleep for 4304 milliseconds
+			
+			// Click on Click to Select Time
+			solo.clickOnView(solo.getView("btntime"));
+			// Wait for dialog
+			solo.waitForDialogToOpen(5000);
+			// Sleep for 2838 milliseconds
+			solo.enterText((android.widget.EditText) solo.getView("numberpicker_input"), "12");
+			
+			solo.clickOnView(solo.getView(android.R.id.button1));
+			// Click on Continue
+			solo.clickOnView(solo.getView("next"));
+			// Wait for activity: 'app.stn.blowout.CategoryActivity'
+			assertTrue("CategoryActivity is not found!", solo.waitForActivity("CategoryActivity"));
+			// Sleep for 1450 milliseconds
+			solo.clickOnView(solo.getView("cb_veg"));
+			// Sleep for 3339 milliseconds
+			// Click on IMFL
+			solo.clickOnView(solo.getView("cb_imfl"));
+			// Sleep for 3148 milliseconds
+			solo.clickOnView(solo.getView("next"));
+			solo.waitForActivity("HotelListActivity");
+			// Wait for activity: 'app.stn.blowout.HotelListActivity'
+			assertTrue("HotelListActivity is not found!", solo.waitForActivity("HotelListActivity"));
+			// Sleep for 4218 milliseconds
+			
+			// Click on ImageView
+			solo.clickOnView(solo.getView("iv_hotel"));
+			
+			solo.waitForActivity("PackageInfoActivity");
+			// Wait for activity: 'app.stn.blowout.PackageInfoActivity'
+			assertTrue("PackageInfoActivity is not found!", solo.waitForActivity("PackageInfoActivity"));
+			
+			// Click on Teachers HighLand    0
+			solo.clickOnText("Teachers HighLand");
+			solo.clickOnText("KingFisher");
+			
+			
+			solo.clickOnText("Mutton Seekh");
+			
+			solo.clickOnText("Barra Mutton Chap");
+			// Click on Chicken Seekh    
+			solo.clickOnText("Chicken Seekh");
+			
+			// Click on Achari Paneer Tikka   
+			solo.clickOnText("Achari Paneer Tikka");
+			// Click on Soya Chap    100.00
+			solo.clickOnText("Soya Chap");
+				
+			// Click on Chilli Paneer    100.00
+			solo.clickOnText("Chilli Paneer");
+			// Click on Fashion Vodka    0
+			solo.clickOnText("Fashion Vodka");
+			// Click on View Booking Summary
+			solo.clickOnView(solo.getView("btn_checkOut"));
+			// Wait for activity: 'app.stn.blowout.UserDetailCheckoutActivity'
+			//assertTrue("UserDetailCheckoutActivity is not found!", solo.waitForActivity("UserDetailCheckoutActivity"));
+			// Sleep for 6798 milliseconds
+			
+			solo.enterText((android.widget.EditText) solo.getView("edt_remark"), "test");
+			
+			// Click on Pay Now
+			solo.clickOnView(solo.getView("btn_payNow"));
+			// Wait for activity: 'app.stn.blowout.PayMentGatWaySecond'
+			assertTrue("PayMentGatWaySecond is not found!", solo.waitForActivity("PayMentGatWaySecond"));
+		}
+
+		
+		
+		
+		public void test6Logout(){
+			solo.waitForActivity("HomeActivity");
+			
+			solo.clickOnView(solo.getView("iv_drawer"));
+			
+			solo.clickInList(5, 0);
+			// Wait for dialog
+			solo.waitForText("Blowout");
+			
+			// Click on Yes
+			solo.clickOnText("Yes");
+		}
+		public void test6ForgotPass(){
+			solo.waitForActivity("HomeActivity");
+			
+			solo.clickOnView(solo.getView("iv_drawer"));
+			solo.clickOnText("Login");
+			solo.clickOnText("Forgot Password");
+			solo.enterText(0, "dharma@gmail.com");
+			assertTrue("Forgot Password mail sent !", solo.waitForText("An email has been sent"));
+			
+		}
+	
+}

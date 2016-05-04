@@ -1,0 +1,316 @@
+package app.stn.blowout.test;
+
+import com.robotium.solo.*;
+import android.test.ActivityInstrumentationTestCase2;
+
+
+@SuppressWarnings("rawtypes")
+public class BookingTest extends ActivityInstrumentationTestCase2 {
+  	private Solo solo;
+  	
+  	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "app.stn.blowout.SplashActivity";
+
+    private static Class<?> launcherActivityClass;
+    static{
+        try {
+            launcherActivityClass = Class.forName(LAUNCHER_ACTIVITY_FULL_CLASSNAME);
+        } catch (ClassNotFoundException e) {
+           throw new RuntimeException(e);
+        }
+    }
+  	
+  	@SuppressWarnings("unchecked")
+    public BookingTest() throws ClassNotFoundException {
+        super(launcherActivityClass);
+    }
+
+  	public void setUp() throws Exception {
+        super.setUp();
+		solo = new Solo(getInstrumentation());
+		getActivity();
+  	}
+  
+   	@Override
+   	public void tearDown() throws Exception {
+        solo.finishOpenedActivities();
+        super.tearDown();
+  	}
+  
+	public void testRun() {
+		// Wait for activity: 'app.stn.blowout.SplashActivity'
+		solo.waitForActivity("SplashActivity", 2000);
+		// Wait for activity: 'app.stn.blowout.HomeActivity'
+		assertTrue("HomeActivity is not found!", solo.waitForActivity("HomeActivity"));
+		// Sleep for 1946 milliseconds
+		solo.sleep(1946);
+		// Click on ImageView
+		solo.clickOnView(solo.getView("iv_drawer"));
+		// Sleep for 7687 milliseconds
+		solo.sleep(7687);
+		// Click on ImageView
+		solo.clickOnView(solo.getView("iv_attend"));
+		// Wait for activity: 'app.stn.blowout.AttenPartyListActivity'
+		assertTrue("AttenPartyListActivity is not found!", solo.waitForActivity("AttenPartyListActivity"));
+		// Sleep for 2262 milliseconds
+		solo.sleep(2262);
+		// Click on Music Love Night Cinema Club & Lounge, Delhi 12/04/2016 ATTEND BOOK NOW
+		solo.clickOnView(solo.getView("rl_mainOuter"));
+		// Wait for activity: 'app.stn.blowout.AttendPartyDetailActivity'
+		assertTrue("AttendPartyDetailActivity is not found!", solo.waitForActivity("AttendPartyDetailActivity"));
+		// Sleep for 8425 milliseconds
+		solo.sleep(8425);
+		// Click on Book Now
+		solo.clickOnView(solo.getView("btn_bookNow"));
+		// Wait for activity: 'app.stn.blowout.BookNormalAttendPartyActivity'
+		assertTrue("BookNormalAttendPartyActivity is not found!", solo.waitForActivity("BookNormalAttendPartyActivity"));
+		// Sleep for 1669 milliseconds
+		solo.sleep(1669);
+		// Click on Empty Text View
+		solo.clickOnView(solo.getView("tv_plus_male"));
+		// Sleep for 3640 milliseconds
+		solo.sleep(3640);
+		// Click on Empty Text View
+		solo.clickOnView(solo.getView("tv_plus_female"));
+		// Sleep for 2788 milliseconds
+		solo.sleep(2788);
+		// Click on Confirm Booking
+		solo.clickOnView(solo.getView("btn_confirm_booking"));
+		// Wait for dialog
+		solo.waitForDialogToOpen(5000);
+		// Sleep for 2478 milliseconds
+		solo.sleep(2478);
+		// Click on Log In
+		solo.clickOnView(solo.getView(android.R.id.button1));
+		// Wait for activity: 'app.stn.blowout.LoginActivity'
+		assertTrue("LoginActivity is not found!", solo.waitForActivity("LoginActivity"));
+		// Sleep for 1372 milliseconds
+		solo.sleep(1372);
+		// Click on Empty Text View
+		solo.clickOnView(solo.getView("edt_email"));
+		// Sleep for 2705 milliseconds
+		solo.sleep(2705);
+		// Enter the text: 'dharma@gmail.com'
+		solo.clearEditText((android.widget.EditText) solo.getView("edt_email"));
+		solo.enterText((android.widget.EditText) solo.getView("edt_email"), "dharma@gmail.com");
+		// Click on Empty Text View
+		solo.clickOnView(solo.getView("edt_pasword"));
+		// Sleep for 1291 milliseconds
+		solo.sleep(1291);
+		// Click on dharma@gmail.com
+		solo.clickOnView(solo.getView("edt_email"));
+		// Sleep for 4035 milliseconds
+		solo.sleep(4035);
+		// Click on dharma@gmail.com
+		solo.clickOnView(solo.getView("edt_email"));
+		// Sleep for 1997 milliseconds
+		solo.sleep(1997);
+		// Enter the text: 'dharma1@gmail.com'
+		solo.clearEditText((android.widget.EditText) solo.getView("edt_email"));
+		solo.enterText((android.widget.EditText) solo.getView("edt_email"), "dharma1@gmail.com");
+		// Sleep for 803 milliseconds
+		solo.sleep(803);
+		// Click on Empty Text View
+		solo.clickOnView(solo.getView("edt_pasword"));
+		// Sleep for 3734 milliseconds
+		solo.sleep(3734);
+		// Enter the text: '123456'
+		solo.clearEditText((android.widget.EditText) solo.getView("edt_pasword"));
+		solo.enterText((android.widget.EditText) solo.getView("edt_pasword"), "123456");
+		// Click on Log In
+		solo.clickOnView(solo.getView("btn_login"));
+		// Sleep for 6199 milliseconds
+		solo.sleep(6199);
+		// Click on Confirm Booking
+		solo.clickOnView(solo.getView("btn_confirm_booking"));
+		// Wait for dialog
+		solo.waitForDialogToOpen(5000);
+		// Sleep for 5759 milliseconds
+		solo.sleep(5759);
+		// Click on OK
+		solo.clickOnView(solo.getView(android.R.id.button1));
+		// Wait for activity: 'app.stn.blowout.HistoryAttendPartyActivity'
+		assertTrue("HistoryAttendPartyActivity is not found!", solo.waitForActivity("HistoryAttendPartyActivity"));
+		// Sleep for 5591 milliseconds
+		solo.sleep(5591);
+		// Click on ImageView
+		solo.clickOnView(solo.getView(android.widget.ImageButton.class, 0));
+		// Sleep for 2769 milliseconds
+		solo.sleep(2769);
+		// Click on ImageView
+		solo.clickOnView(solo.getView("iv_drawer"));
+		// Sleep for 2892 milliseconds
+		solo.sleep(2892);
+		// Click on Attend Party History
+		solo.clickInList(3, 0);
+		// Wait for activity: 'app.stn.blowout.HistoryAttendPartyActivity'
+		assertTrue("HistoryAttendPartyActivity is not found!", solo.waitForActivity("HistoryAttendPartyActivity"));
+		// Sleep for 3783 milliseconds
+		solo.sleep(3783);
+		// Click on Cancel Party
+		solo.clickOnView(solo.getView("btn_cancel_party"));
+		// Wait for dialog
+		solo.waitForDialogToOpen(5000);
+		// Sleep for 2307 milliseconds
+		solo.sleep(2307);
+		// Click on OK
+		solo.clickOnView(solo.getView(android.R.id.button1));
+		// Wait for dialog to close
+		solo.waitForDialogToClose(5000);
+		// Sleep for 1901 milliseconds
+		solo.sleep(1901);
+		// Click on ImageView
+		solo.clickOnView(solo.getView(android.widget.ImageButton.class, 0));
+		// Sleep for 1133 milliseconds
+		solo.sleep(1133);
+		// Click on ImageView
+		solo.clickOnView(solo.getView("iv_drawer"));
+		// Sleep for 10539 milliseconds
+		solo.sleep(10539);
+		// Click on ImageView
+		solo.clickOnView(solo.getView("iv_throw"));
+		// Wait for activity: 'app.stn.blowout.ThrowPartyActivity'
+		assertTrue("ThrowPartyActivity is not found!", solo.waitForActivity("ThrowPartyActivity"));
+		// Sleep for 2206 milliseconds
+		solo.sleep(2206);
+		// Click on Select Date
+		solo.clickOnView(solo.getView("btndate"));
+		// Wait for dialog
+		solo.waitForDialogToOpen(5000);
+		// Sleep for 2513 milliseconds
+		solo.sleep(2513);
+		// Click on Set
+		solo.clickOnView(solo.getView(android.R.id.button1));
+		// Sleep for 4304 milliseconds
+		solo.sleep(4304);
+		// Click on Click to Select Time
+		solo.clickOnView(solo.getView("btntime"));
+		// Wait for dialog
+		solo.waitForDialogToOpen(5000);
+		// Sleep for 2838 milliseconds
+		solo.sleep(2838);
+		// Enter the text: '10'
+		solo.clearEditText((android.widget.EditText) solo.getView("numberpicker_input"));
+		solo.enterText((android.widget.EditText) solo.getView("numberpicker_input"), "10");
+		// Sleep for 1964 milliseconds
+		solo.sleep(1964);
+		// Click on Set
+		solo.clickOnView(solo.getView(android.R.id.button1));
+		// Sleep for 1139 milliseconds
+		solo.sleep(1139);
+		// Click on Continue
+		solo.clickOnView(solo.getView("next"));
+		// Wait for activity: 'app.stn.blowout.CategoryActivity'
+		assertTrue("CategoryActivity is not found!", solo.waitForActivity("CategoryActivity"));
+		// Sleep for 1450 milliseconds
+		solo.sleep(1450);
+		// Click on Vegetarian Snacks
+		solo.clickOnView(solo.getView("cb_veg"));
+		// Sleep for 3339 milliseconds
+		solo.sleep(3339);
+		// Click on IMFL
+		solo.clickOnView(solo.getView("cb_imfl"));
+		// Sleep for 3148 milliseconds
+		solo.sleep(3148);
+		// Click on Continue
+		solo.clickOnView(solo.getView("next"));
+		// Wait for activity: 'app.stn.blowout.HotelListActivity'
+		assertTrue("HotelListActivity is not found!", solo.waitForActivity("HotelListActivity"));
+		// Sleep for 4218 milliseconds
+		solo.sleep(4218);
+		// Click on ImageView
+		solo.clickOnView(solo.getView("iv_hotel"));
+		// Wait for activity: 'app.stn.blowout.PackageInfoActivity'
+		assertTrue("PackageInfoActivity is not found!", solo.waitForActivity("PackageInfoActivity"));
+		// Sleep for 12489 milliseconds
+		solo.sleep(12489);
+		// Click on View Booking Summary
+		solo.clickOnView(solo.getView("btn_checkOut"));
+		// Wait for dialog
+		solo.waitForDialogToOpen(5000);
+		// Sleep for 1322 milliseconds
+		solo.sleep(1322);
+		// Click on OK
+		solo.clickOnView(solo.getView(android.R.id.button1));
+		// Wait for dialog to close
+		solo.waitForDialogToClose(5000);
+		// Sleep for 2779 milliseconds
+		solo.sleep(2779);
+		// Click on Teachers HighLand    0
+		solo.clickOnText(java.util.regex.Pattern.quote("Teachers HighLand"));
+		// Sleep for 862 milliseconds
+		solo.sleep(862);
+		// Click on View Booking Summary
+		solo.clickOnView(solo.getView("btn_checkOut"));
+		// Wait for dialog
+		solo.waitForDialogToOpen(5000);
+		// Sleep for 1663 milliseconds
+		solo.sleep(1663);
+		// Click on OK
+		solo.clickOnView(solo.getView(android.R.id.button1));
+		// Wait for dialog to close
+		solo.waitForDialogToClose(5000);
+		// Sleep for 646 milliseconds
+		solo.sleep(646);
+		// Click on KingFisher    0
+		solo.clickOnText(java.util.regex.Pattern.quote("KingFisher"));
+		// Sleep for 620 milliseconds
+		solo.sleep(620);
+		// Click on View Booking Summary
+		solo.clickOnView(solo.getView("btn_checkOut"));
+		// Wait for dialog
+		solo.waitForDialogToOpen(5000);
+		// Sleep for 1495 milliseconds
+		solo.sleep(1495);
+		// Click on OK
+		solo.clickOnView(solo.getView(android.R.id.button1));
+		// Wait for dialog to close
+		solo.waitForDialogToClose(5000);
+		// Sleep for 1319 milliseconds
+		solo.sleep(1319);
+		// Click on Mutton Seekh    100.00
+		solo.clickOnText(java.util.regex.Pattern.quote("Mutton Seekh"));
+		// Sleep for 2056 milliseconds
+		solo.sleep(2056);
+		// Click on Achari Paneer Tikka    100.00
+		solo.clickOnText(java.util.regex.Pattern.quote("Achari Paneer Tikka"));
+		// Sleep for 1330 milliseconds
+		solo.sleep(1330);
+		// Click on Soya Chap    100.00
+		solo.clickOnText(java.util.regex.Pattern.quote("Soya Chap"));
+		// Sleep for 1981 milliseconds
+		solo.sleep(1981);
+		// Click on Chicken Seekh    100.00
+		solo.clickOnText(java.util.regex.Pattern.quote("Chicken Seekh"));
+		// Click on Barra Mutton Chap    100.00
+		solo.clickOnText(java.util.regex.Pattern.quote("Barra Mutton Chap"));
+		// Sleep for 1729 milliseconds
+		solo.sleep(1729);
+		// Click on Chilli Paneer    100.00
+		solo.clickOnText(java.util.regex.Pattern.quote("Chilli Paneer"));
+		// Sleep for 1706 milliseconds
+		solo.sleep(1706);
+		// Click on Fashion Vodka    0
+		solo.clickOnText(java.util.regex.Pattern.quote("Fashion Vodka"));
+		// Sleep for 979 milliseconds
+		solo.sleep(979);
+		// Click on View Booking Summary
+		solo.clickOnView(solo.getView("btn_checkOut"));
+		// Wait for activity: 'app.stn.blowout.UserDetailCheckoutActivity'
+		assertTrue("UserDetailCheckoutActivity is not found!", solo.waitForActivity("UserDetailCheckoutActivity"));
+		// Sleep for 6798 milliseconds
+		solo.sleep(6798);
+		// Click on Empty Text View
+		solo.clickOnView(solo.getView("edt_remark"));
+		// Sleep for 2070 milliseconds
+		solo.sleep(2070);
+		// Enter the text: 'test'
+		solo.clearEditText((android.widget.EditText) solo.getView("edt_remark"));
+		solo.enterText((android.widget.EditText) solo.getView("edt_remark"), "test");
+		// Sleep for 1403 milliseconds
+		solo.sleep(1403);
+		// Click on Pay Now
+		solo.clickOnView(solo.getView("btn_payNow"));
+		// Wait for activity: 'app.stn.blowout.PayMentGatWaySecond'
+		assertTrue("PayMentGatWaySecond is not found!", solo.waitForActivity("PayMentGatWaySecond"));
+	}
+}
