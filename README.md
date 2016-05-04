@@ -1,2 +1,2 @@
-# mavenautomation
-mavenautomation project for selenium
+# Robotium Projects
+Robotium project sample script  
